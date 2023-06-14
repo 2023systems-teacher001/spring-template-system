@@ -1,0 +1,32 @@
+@startuml doLogin
+	actor User as client
+	boundary FrontController as fc
+	control AuthController as ac
+	participant AuthRepository as ar
+
+	client -> fc: ログインする(メールアドレス: String, パスワード: Stirng): String\n[POST] /app/login
+	fc -> ac: 認証する(メールアドレス: String, パスワード: Stirng): boolean
+	ac -> ar: メールアドレスとパスワードから認証エンティティのインスタンスを取得する（メールアドレス: String, パスワード: Stirng）: AuthEntity
+	ac <-- ar: 該当するAuthEntityのインスタンス
+	||30||
+	alt 該当するインスタンスがある場合（認証成功の場合）
+		||5||
+		ac -> ac: 該当する認証エンティティのインスタンスから認証モデルのインスタンスを生成する（メールアドレス: String, ハンドルネーム: String, 権限: int）
+		ac -> ac: 生成した認証モデルのインスタンスをセッションに登録する
+		note right:<font color="tomato"> 認証モデルに@SessionScopeが宣言されている場合は不要。</font>
+		fc <-- ac: トップ画面（権限モードによって切り替える）
+		||20||
+	else 該当するインスタンスがない場合（認証失敗の場合）
+		||5||
+		ac -> ac: エラーメッセージをモデルに登録する
+			note right
+			「error」というキーで「メールアドレスとパスワードは一致しませんでした。」
+			というメッセージを登録する。
+			end note
+		fc <-- ac: ログイン画面（権限モードによって切り替える）
+		||20||
+	end
+
+	client <-- fc: 遷移先画面View名
+
+@enduml

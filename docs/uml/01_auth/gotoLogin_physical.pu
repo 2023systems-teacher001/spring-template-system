@@ -1,0 +1,33 @@
+@startuml gotoLogin
+	actor User as client
+	boundary FrontController as fc
+	control AuthController as ac
+	participant AuthService as as
+	
+	group <font color="Navy">一般ユーザとしてアクセスする場合
+		||7||
+		client -> fc: URLにアクセス\n[GET] /app
+		fc  -> ac: index(model): String
+		ac --> as: showLogin(1): String
+		ac <-- as: "login"
+		ac --> fc: "login"
+		fc  -> fc: model.addAttribute("mode", 1)
+		fc --> client: "login"
+		||10||
+	end
+
+	||20||
+
+	group <font color="Navy">管理者ユーザとしてアクセスする場合
+		||7||
+		client -> fc: URLにアクセス\n[GET] /app/admin
+		fc  -> ac: index(model): String
+		ac --> as: showLogin(0): String
+		ac <-- as: "admin/login"
+		ac --> fc: "admin/login"
+		fc  -> fc: mode.addAttribute("mode", 0)
+		fc --> client: "admin/login"
+		||10||
+	end
+	||10||
+@enduml

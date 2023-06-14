@@ -1,0 +1,43 @@
+@startuml auth-seq
+	actor User as client
+	boundary FrontController as fc
+	control AuthController as ac
+	participant AuthService as as
+	
+	group <font color="Navy">一般ユーザとしてアクセスする場合
+		||7||
+		client -> fc: URLにアクセス\n[GET] /app
+		fc  -> ac: ログイン画面を表示する(表示画面モード: 一般ユーザ): String
+		ac  -> as: ログイン画面を表示する(): String
+		ac <-- as: 一般ユーザ用ログイン画面（固定）: String
+		ac --> fc: 一般ユーザ用ログイン画面（固定）: String
+		fc  -> fc: 表示画面モードをモデルに登録する
+		note bottom
+			「mode」をキーとして「0」を登録する。
+			また、画面のformタグ直下にname属性「mode」のhiddenタグの
+			value属性にこのキーを指定する（modeの値はrolesテーブルを参照）。
+		end note
+		fc --> client: 一般ユーザ用ログイン画面（固定）: String
+		||10||
+	end
+
+	||20||
+
+	group <font color="Navy">管理者ユーザとしてアクセスする場合
+		||7||
+		client -> fc: URLにアクセス\n[GET] /app/admin
+		fc  -> ac: ログイン画面を表示する(表示画面モード: 管理者ユーザ): String
+		ac  -> as: ログイン画面を表示する(): String
+		ac <-- as: 管理者ユーザ用ログイン画面（固定）: String
+		ac --> fc: 管理者ユーザ用ログイン画面（固定）: String
+		fc  -> fc: 表示画面モードをモデルに登録する
+		note bottom
+			「mode」をキーとして「1」を登録する。
+			また、画面のformタグ直下にname属性「mode」のhiddenタグの
+			value属性にこのキーを指定する（modeの値はrolesテーブルを参照）。
+		end note
+		fc --> client: 管理者ユーザ用ログイン画面（固定）: String
+		||10||
+	end
+	||10||
+@enduml
