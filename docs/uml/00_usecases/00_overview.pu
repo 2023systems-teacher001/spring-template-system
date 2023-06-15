@@ -1,0 +1,24 @@
+@startuml usecases_overview
+	left to right direction
+actor 利用者 as user
+actor 管理者 as admin
+rectangle システム（仮） {
+user -- (UA01:ユーザ認証する)
+				(UA01:ユーザ認証する) -- admin
+admin -- (UU01:ユーザを検索する)
+				(UU01:ユーザを検索する) ..|> (ユーザの全件検索): <<include>>
+				(UU01:ユーザを検索する) ..|> (ユーザの主キー検索): <<include>>
+				(UU01:ユーザを検索する) ..|> (ユーザの氏名検索): <<include>>
+user -- (UU02:利用者を登録する)
+				(UU02:利用者を登録する) -- admin
+user -- (UU03:利用者を更新する)
+				(UU03:利用者を更新する) -- admin
+user -- (UU04:利用者を削除する)
+				(UU04:利用者を削除する) -- admin
+user -- (UI01:商品を検索する)
+				(UI01:商品を検索する) -- admin
+				(UI02:商品を追加する) -- admin
+				(UI03:商品を更新する) -- admin
+				(UI04:商品を削除する) -- admin
+}
+@enduml

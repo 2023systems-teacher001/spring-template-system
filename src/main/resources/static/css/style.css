@@ -1,0 +1,75 @@
+html {
+  font-size: 62.5%;
+  background-color: white;
+  padding: 0;
+}
+html body {
+  color: dimgray;
+  width: 75%;
+  margin: 0 auto;
+  padding: 0;
+  font-size: 1.4rem;
+}
+html body main {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.application_title {
+  margin: 0;
+  font-size: 1.4rem;
+  text-align: right;
+}
+
+.content_title {
+  margin: 0;
+  font-size: 2.1rem;
+  text-align: center;
+}
+
+.paragraph_title {
+  margin: 0;
+  font-size: 1.61rem;
+}
+
+.controls {
+  width: 33.6rem;
+  margin: 3.15rem auto;
+  padding: 1.75rem;
+  border: 1px solid dimgray;
+}
+.controls th, .controls td {
+  padding: 0.35rem 0.7rem;
+}
+.controls th {
+  font-weight: normal;
+  text-align: right;
+}
+.controls td[colspan] {
+  padding-top: 0.7rem;
+  padding-bottom: 0.175rem;
+}
+
+.centering {
+  text-align: center;
+}
+
+.large {
+  font-size: 1.61rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.copyright {
+  text-align: center;
+}
+
+.customer_management, .items_management {
+  line-height: 1.5;
+}
+.customer_management dd, .items_management dd {
+  margin-left: 2.45rem;
+  margin-bottom: 0.175rem;
+}/*# sourceMappingURL=style.css.map */

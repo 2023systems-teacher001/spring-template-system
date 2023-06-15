@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+// ボディ幅
+$DEFAULT_WIDTH: 75%;
+
+// デフォルトのフォントサイズ
+$DEFAULT_FONT_SIZE: 1.4rem;
+$H1_SCALE: 1.0;
+$H2_SCALE: 1.5;
+$H3_SCALE: 1.15;
+
+// **
+// * デフォルトフォントサイズのを基準としたサイズを計算する。
+// * @param $scale デフォルトフォントサイズに対する相対倍率
+// * @return デフォルトフォントサイズのを基準としたサイズ（単位：rem）
+// */
+@function calcSizeByScale($scale: 1.0) {
+    @return $DEFAULT_FONT_SIZE * $scale;
+}

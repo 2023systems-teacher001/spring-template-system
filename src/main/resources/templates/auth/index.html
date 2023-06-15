@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Spring Boot アプリケーション（仮）</title>
+	<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body id="auth">
+	<header th:replace="common/header"></header>
+	<main>
+		<article>
+			<h2 class="content_title">ログイン</h2>
+			<form class="controls" action="/login" method="post">
+				<input type="hidden" name="role" th:value="${role}" />
+				<table>
+					<tr>
+						<th>メールアドレス</th>
+						<td>
+							<input th:if="${role == 0}" type="text" name="email" value="info@hoge.com" />
+							<input th:if="${role == 1}" type="text" name="email" value="user01@hoge.com" />
+						</td>
+					</tr>
+					<tr>
+						<th>パスワード</th>
+						<td>
+							<input th:if="${role == 0}" type="text" name="password" value="pass" />
+							<input th:if="${role == 1}" type="text" name="password" value="pass01" />
+						</td>
+					</tr>
+					<tr>
+						<td class="centering" colspan="2">
+							<input type="submit" value="ログイン" />
+						</td>
+					</tr>
+				</table>
+			</form>
+		</article>
+	</main>
+	<footer th:replace="common/footer"></footer>
+</body>
+</html>

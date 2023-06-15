@@ -1,0 +1,65 @@
+@charset "utf-8";
+@import "./partials/common";
+
+html {
+	font-size: 62.5%;
+	background-color: white;
+	padding: 0;
+	body {
+		color: dimgray;
+		width: 75%;
+		margin: 0 auto;
+		padding: 0;
+		font-size: 1.4rem;
+		main {
+			width: 75%;
+			margin: 0 auto;
+		}
+	}
+}
+
+// タイトル文字スタイル
+.application_title {margin: 0; font-size: calcSizeByScale($H1_SCALE); text-align: right;}
+.content_title {margin: 0; font-size: calcSizeByScale($H2_SCALE); text-align: center;}
+.paragraph_title {margin: 0; font-size: calcSizeByScale($H3_SCALE);}
+
+.controls {
+	width: calcSizeByScale(24);
+	margin: calcSizeByScale(2.25) auto;
+	padding: calcSizeByScale(1.25);
+	border: 1px solid dimgray;
+	th, td {
+		padding: calcSizeByScale(0.25) calcSizeByScale(0.50);
+	}
+	th {
+		font-weight: normal;
+		text-align: right;
+	}
+	td {
+		&[colspan] {
+			padding-top: calcSizeByScale(0.50);
+			padding-bottom: calcSizeByScale(0.125);
+		}
+	}
+}
+
+.centering {
+	text-align: center;
+}
+.large {
+	font-size: calcSizeByScale($H3_SCALE);
+}
+.bold {
+	font-weight: bold;
+}
+.copyright {
+	text-align: center;
+}
+
+.customer_management, .items_management {
+	line-height: 1.5;
+	dd {
+		margin-left: calcSizeByScale(1.75);
+		margin-bottom: calcSizeByScale(0.125);
+	}
+}
