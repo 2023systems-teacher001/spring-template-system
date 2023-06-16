@@ -1,0 +1,48 @@
+@startuml goToLogin_physical
+	actor User as client
+	boundary Dispatcher as dp
+	control AuthController as ac
+	participant AuthService as as
+	participant AuthRepository as ar
+	participant AuthEntity as ae
+
+	||7||
+	client -> dp: URLにアクセス\n[POST] /app
+	activate dp
+	dp  -> ac: login(role: int = 1): String
+	activate ac
+	ac  -> as: auth(role: int = 1): String
+	activate as
+	as  -> ar: findByEmailAndPassword(email: String, password: String): AuthEntity
+	activate ar
+	ar  -> ae: <<create>>
+	activate ae
+	ar <-- ae: authEntity
+	deactivate ae
+	as <-- ar: authEntity
+	deactivate ar
+	as  -> as: convertEntityToModel(): 
+	||10||
+	alt authEntity != null
+		||10||
+		alt role = ROLE_ADMIN = 0
+			ac <-- as: nextView = "admin/index"
+		||5||
+		else role = ROLE_USER = 1
+			ac <-- as: nextView = "index"
+		||5||
+		end
+	||10||
+	else authEntity == null
+		ac <-- as: nextView = "auth/login"
+	||10||
+	end
+	
+	deactivate as
+	dp <-- ac: nextView
+	deactivate ac
+	dp --> client: nextView
+	deactivate dp
+	||10||
+
+@enduml
